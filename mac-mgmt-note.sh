@@ -11,3 +11,13 @@ cat >> /etc/hosts <<EOL
 #Vmware environment nodes
 10.193.19.243  coprhd-ingestion
 EOL
+
+echo "[coprhd]
+coprhd-ingestion" > inventory.ini
+
+ssh-keygen -t rsa -b 2048
+
+ansible-playbook playbook/ssh-addkey.yml -u root --ask-pass
+
+echo "[coprhd]
+coprhd-ingestion ansible_connection=ssh ansible_user=root" > inventory.ini
