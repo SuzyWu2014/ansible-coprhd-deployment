@@ -1,4 +1,4 @@
-# aisible-coprhd-deployment
+# ansible-coprhd-deployment
 
 Description: 
   This repository aims to deploy CoprHD on the remote host(hosting on vmware in my case), and deploy ScaleIO driver onto it after that.
