@@ -17,7 +17,7 @@ coprhd-ingestion" > inventory.ini
 
 ssh-keygen -t rsa -b 2048
 
-ansible-playbook playbook/ssh-addkey.yml -u root --ask-pass
+ansible-playbook playbook/ssh-addkey.yml -u root -i hosts --ask-pass
 
 echo "[coprhd]
 coprhd-ingestion ansible_connection=ssh ansible_user=root" > inventory.ini

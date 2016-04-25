@@ -1,0 +1,3 @@
+[coprhd]
+coprhd-ingestion ansible_ssh_host=10.193.19.243 ansible_user=root
+

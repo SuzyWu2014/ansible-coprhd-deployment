@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+
+  - zypper: name=git state=present disable_recommends=yes 
+
+  - zypper: name=make state=present disable_recommends=yes
