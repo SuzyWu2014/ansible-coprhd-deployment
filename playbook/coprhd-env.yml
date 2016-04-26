@@ -32,3 +32,6 @@
  
   - name: script to configure java 8
     command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installJava 8
+
+  - name: create the storageOS user and group
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installStorageOS
