@@ -6,6 +6,23 @@
 
   tasks:
 
-  - zypper: name=git state=present disable_recommends=yes 
+  - name: install git
+    zypper: name=git state=present disable_recommends=yes 
 
-  - zypper: name=make state=present disable_recommends=yes
+  - name: intall make
+    zypper: name=make state=present disable_recommends=yes
+
+  - name: git clone coprhd repo
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no
+
+  - name: execute the script to install addtional package repository
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installRepositories
+
+  - name: execute the script to install addtional rpm for coprHD
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installPackages
+
+  - name: execute the script to install Patched Nginx server
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
+
+ # - name: script to configure java 8
+  #  command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installJava 8
