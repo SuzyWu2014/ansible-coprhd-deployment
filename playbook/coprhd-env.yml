@@ -1,3 +1,6 @@
+########################################################################################################
+# This file configures OpenSuse environment for CoprHD using the provided scripts in CoprHD repo
+########################################################################################################
 ---
 - hosts: all
   sudo: yes
@@ -15,14 +18,14 @@
   - name: git clone coprhd repo
     git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no
 
- # - name: execute the script to install addtional package repository
- #   command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installRepositories
+  - name: execute the script to install addtional package repository
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installRepositories
 
-#  - name: execute the script to install addtional rpm for coprHD - gonna take some time...
-#   command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installPackages
+  - name: execute the script to install addtional rpm for coprHD - gonna take some time...
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installPackages
 
-#  - name: execute the script to install Patched Nginx server
- #   command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
+  - name: execute the script to install Patched Nginx server
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
   
   - name: install java 8
     zypper: name=java-1_8_0-openjdk state=present disable_recommends=yes disable_gpg_check=yes 
