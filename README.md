@@ -15,7 +15,7 @@ Usage:
 1. Installation
  - Modify coprHD remote host ip on mac-mgmt-node.sh
  - Run sudo ./mac-mgmt-node.sh (need to modify /etc/hosts file), and don't miss to enter the SSH password in the end
- - Run ansible all -m ping
+ - Run ansible all -m ping -i hosts
    --> The output will be:
 	coprhd-ingestion | SUCCESS => {
     	"changed": false,
@@ -24,3 +24,8 @@ Usage:
 
  - If it fails, check your ssh setting, and run it again.
  
+2. Configure OpenSuse environment for CoprHD
+ - Run ansible-playbook playbook/coprhd-env.yml -i hosts
+
+ - Possible issues:
+   - failed to ssh: try to restart sshd service.
