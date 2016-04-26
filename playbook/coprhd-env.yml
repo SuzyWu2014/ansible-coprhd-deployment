@@ -18,11 +18,17 @@
   - name: execute the script to install addtional package repository
     command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installRepositories
 
-  - name: execute the script to install addtional rpm for coprHD
+  - name: execute the script to install addtional rpm for coprHD - gonna take some time...
     command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installPackages
 
   - name: execute the script to install Patched Nginx server
     command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
+  
+  - name: install java 8
+    zypper: name=java-1_8_0-openjdk state=present disable_recommends=yes disable_gpg_check=yes 
 
- # - name: script to configure java 8
-  #  command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installJava 8
+  - name: install java 8 devel
+    zypper: name=java-1_8_0-openjdk-devel state=present disable_recommends=yes disable_gpg_check=yes
+ 
+  - name: script to configure java 8
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installJava 8
