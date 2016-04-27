@@ -4,6 +4,6 @@ coprhd-ingestion ansible_ssh_host=10.193.19.243 ansible_user=root
 coprhd-ingestion
 
 [coprhd:vars]
-http_proxy=http://http://proxy.oregonstate.edu:3128
-https_proxy=http://http://proxy.oregonstate.edu:3128
-JAVA_TOOL_OPTIONS="-Dhttp.proxyHost=http://proxy.oregonstate.edu -Dhttp.proxyPort=3128  -Dhttps.proxyHost=http://proxy.oregonstate.edu -Dhttps.proxyPort=3128
+http_proxy=http://proxy.oregonstate.edu:3128/
+https_proxy=http://proxy.oregonstate.edu:3128/
+JAVA_TOOL_OPTIONS=-Dhttp.proxyHost=http://proxy.oregonstate.edu -Dhttp.proxyPort=3128  -Dhttps.proxyHost=http://proxy.oregonstate.edu -Dhttps.proxyPort=3128

@@ -29,3 +29,6 @@ Usage:
 
  - Possible issues:
    - failed to ssh: try to restart sshd service.
+
+3. CoprHD Deployment
+  - still facing proxy issue when building the rpm
