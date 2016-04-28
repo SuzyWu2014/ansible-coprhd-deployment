@@ -31,4 +31,5 @@ Usage:
    - failed to ssh: try to login to your vm and restart sshd service. You may also want to check the SuSEfirewall2.
 
 3. CoprHD Deployment
-  - Note: It will always use the newest repo.
+  - Note: It will always use the newest master repo.
+  - Current Status: Build failure occured in portal:playCompile. Working on it...

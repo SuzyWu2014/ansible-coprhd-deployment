@@ -18,6 +18,10 @@
   - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.https.proxyHost=proxy.oregonstate.edu"
   - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.https.proxyPort=3128"
 
+  # There is a build failure on portal:playCompile
+  #- name: go to coprhd-controller folder and build prm   
+  #  command: chdir=/root/coprhd-controller make clobber BUILD_TYPE=oss rpm
+
 
 #   #Setup a Transparent Proxy 
 #   - name: Download redsocks for OpenSuse
@@ -47,5 +51,4 @@
  
 #   - name: restart ressocks service
 #     service: name=redsocks state=restarted
-  #- name: go to coprhd-controller folder and build prm   
-  #  command: chdir=/root/coprhd-controller make clobber BUILD_TYPE=oss rpm
+
