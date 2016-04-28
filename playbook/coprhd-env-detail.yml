@@ -1,0 +1,34 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+
+  - name: install git
+    zypper: name=git state=present disable_recommends=yes 
+
+  - name: intall make
+    zypper: name=make state=present disable_recommends=yes
+  
+  - name: intall repositories
+    zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes 
+
+  - zypper_repository: name=suse-13.2-oss-update repo=http://download.opensuse.org/repositories/openSUSE:/13.2:/Update/standard state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-non-oss repo=http://download.opensuse.org/distribution/13.2/repo/non-oss/suse state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-monitoring repo=http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2 state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-seife repo=http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2 state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-python repo=http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2 state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-network repo=http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2 state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-building repo=http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2 state=present disable_gpg_check=yes
+  
+  - zypper_repository: name=suse-13.2-appliances repo=http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2 state=present disable_gpg_check=yes
+
+  - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes
