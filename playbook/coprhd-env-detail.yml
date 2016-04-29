@@ -281,11 +281,19 @@
   - zypper: name=yum disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=zlib-devel disable_gpg_check=yes disable_recommends=yes state=present
-  
-  - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=present
+
+#doesn't need docker for regular built  
+#  - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=present
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/lvm2-2.02.98-43.24.1.src.rpm disable_gpg_check=yes state=present
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
+## Following might not need
+  - zypper: name=devel_basis type=pattern disable_gpg_check=yes disable_recommends=yes state=present
+
+  - zypper: name=unzip disable_gpg_check=yes disable_recommends=yes state=present
+
+
+

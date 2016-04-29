@@ -33,3 +33,11 @@ Usage:
 3. CoprHD Deployment
   - Note: It will always use the newest master repo.
   - Current Status: Build failure occured in portal:playCompile. Working on it...
+
+  Possible issues:
+  - proxy issues:
+    solution:
+    - set system-wide proxy -> seem doesn't work
+    - set proxy to each framework used
+
+  
