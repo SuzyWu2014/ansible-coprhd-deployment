@@ -13,25 +13,29 @@
     zypper: name=make state=present disable_recommends=yes
   
   - name: intall repositories
-    zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes 
+    zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-oss-update repo=http://download.opensuse.org/repositories/openSUSE:/13.2:/Update/standard state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-oss-update repo=http://download.opensuse.org/repositories/openSUSE:/13.2:/Update/standard state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-non-oss repo=http://download.opensuse.org/distribution/13.2/repo/non-oss/suse state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-non-oss repo=http://download.opensuse.org/distribution/13.2/repo/non-oss/suse state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-monitoring repo=http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-monitoring repo=http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-seife repo=http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-seife repo=http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-python repo=http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-python repo=http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-network repo=http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-network repo=http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-building repo=http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-building repo=http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
   
-  - zypper_repository: name=suse-13.2-appliances repo=http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-appliances repo=http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes
+  - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
+
+  # - zypper_repository: name=scalpel4k-opensuse repo=http://download.opensuse.org/repositories/home:/scalpel4k/openSUSE_Factory state=present disable_gpg_check=yes refresh=yes
+
+  # - zypper_repository: name=VirtualBox-for-openSUSE13.2 repo=http://download.virtualbox.org/virtualbox/rpm/opensuse/13.2 state=present disable_gpg_check=yes refresh=yes
 
   - name: install Packages
     zypper: name=ant disable_gpg_check=yes disable_recommends=yes state=present
@@ -91,11 +95,12 @@
 
   - zypper: name=iputils disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=java-1_7_0-openjdk disable_gpg_check=yes disable_recommends=yes state=present
+  - zypper: name=java-1_7_0-openjdk disable_gpg_check=yes disable_recommends=yes state=absent
 
-  - zypper: name=java-1_7_0-openjdk-devel disable_gpg_check=yes disable_recommends=yes state=present
-
-  - zypper: name=java-1_8_0-openjdk disable_gpg_check=yes disable_recommends=yes state=present
+  - zypper: name=java-1_7_0-openjdk-devel disable_gpg_check=yes disable_recommends=yes state=absent
+  
+  - name: install java 8
+    zypper: name=java-1_8_0-openjdk disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=java-1_8_0-openjdk-devel disable_gpg_check=yes disable_recommends=yes state=present
 
@@ -149,7 +154,8 @@
 
   - zypper: name=libuuid-devel disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=libvpx1 disable_gpg_check=yes disable_recommends=yes state=present
+  - name: install libvpx1
+    zypper: name=http://rpm.pbone.net/index.php3/stat/26/dist/97/size/1767471/name/libvpx-1.3.0-2.1.2.src.rpm disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=libxml2-devel disable_gpg_check=yes disable_recommends=yes state=present
 
@@ -255,11 +261,13 @@
 
   - zypper: name=vim disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=virtualbox disable_gpg_check=yes disable_recommends=yes state=present
+#disable virtualbox
+  # - name: install virtualbox
+  #   zypper: name=virtualbox disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=virtualbox-guest-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=virtualbox-guest-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=virtualbox-host-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=virtualbox-host-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=wget disable_gpg_check=yes disable_recommends=yes state=present
 
@@ -274,7 +282,7 @@
   - zypper: name=xorg-x11-essentials disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=xorg-x11-fonts disable_gpg_check=yes disable_recommends=yes state=present
-
+##install error here#################
   - zypper: name=xorg-x11-server disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=xz-devel disable_gpg_check=yes disable_recommends=yes state=present
@@ -291,12 +299,10 @@
   - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
-# Following might not need
-  - zypper: name=devel_basis type=pattern disable_gpg_check=yes disable_recommends=yes state=present
+  
 
-  - zypper: name=unzip disable_gpg_check=yes disable_recommends=yes state=present
 
-  # - name: install java 8
+
 
 
 
