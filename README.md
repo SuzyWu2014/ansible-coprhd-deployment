@@ -41,3 +41,7 @@ Usage:
     - set proxy to each framework used
 
   
+
+  Note:
+
+  1. Ansible Zypper module: till version 2.0.1.1, Ansible zypper module doesn't support (force-resolution)

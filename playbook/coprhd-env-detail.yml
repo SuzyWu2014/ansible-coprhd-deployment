@@ -282,12 +282,16 @@
   - zypper: name=xorg-x11-essentials disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=xorg-x11-fonts disable_gpg_check=yes disable_recommends=yes state=present
-##install error here#################
-  - zypper: name=xorg-x11-server disable_gpg_check=yes disable_recommends=yes state=present
-
-  - zypper: name=xz-devel disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=yum disable_gpg_check=yes disable_recommends=yes state=present
+
+  - command: zypper update -y
+
+  # - name: install xorg-x11-server 
+  #   zypper: name=xorg-x11-server disable_gpg_check=yes disable_recommends=no state=present
+  # - command: zypper install xorg-x11-server -2
+
+  - zypper: name=xz-devel disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=zlib-devel disable_gpg_check=yes disable_recommends=yes state=present
 
