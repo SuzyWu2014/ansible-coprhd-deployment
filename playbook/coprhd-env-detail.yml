@@ -261,7 +261,7 @@
 
   - zypper: name=vim disable_gpg_check=yes disable_recommends=yes state=present
 
-#disable virtualbox
+  #disable virtualbox
   # - name: install virtualbox
   #   zypper: name=virtualbox disable_gpg_check=yes disable_recommends=yes state=present
 
@@ -295,7 +295,7 @@
 
   - zypper: name=zlib-devel disable_gpg_check=yes disable_recommends=yes state=present
 
-#doesn't need docker for regular built  
+  # docker - not needed
   - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=absent
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/lvm2-2.02.98-43.24.1.src.rpm disable_gpg_check=yes state=present
@@ -304,8 +304,8 @@
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
   
-
-
+  - name: choose java 8
+    alternatives: name=java path=/usr/lib64/jvm/java-1.8.0-openjdk-1.8.0/jre/bin/java
 
 
 
