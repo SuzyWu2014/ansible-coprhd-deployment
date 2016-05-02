@@ -307,6 +307,11 @@
   - name: choose java 8
     alternatives: name=java path=/usr/lib64/jvm/java-1.8.0-openjdk-1.8.0/jre/bin/java
 
+  - name: git clone coprhd repo
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no
+
+  - name: execute the script to install Patched Nginx server
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
 
 
 
