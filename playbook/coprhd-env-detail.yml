@@ -313,5 +313,13 @@
   - name: execute the script to install Patched Nginx server
     command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNginx
 
+  - name: create the storageOS user and group
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installStorageOS
+
+  - name: copy ovfenv.properties
+    copy: src=ovfenv.properties dest=/etc/ovfenv.properties 
+
+  - name: create the default coprHD Network configuration file
+    command: bash /root/coprhd-controller/packaging/appliance-images/openSUSE/13.2/CoprHDDevKit/configure.sh installNetworkConfigurationFile
 
 
