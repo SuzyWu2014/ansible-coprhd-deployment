@@ -325,5 +325,9 @@
   - name: enable ssh in SuSEfirewall2
     lineinfile: dest=/etc/sysconfig/SuSEfirewall2 state=present regexp="^FW_SERVICES_EXT_TCP" line='FW_SERVICES_EXT_TCP="ssh"'  insertafter="^#"
 
+  - name: restart SuSEfirewall2
+    service: name=SuSEfirewall2 state=restarted
+
+
   # - lineinfile: dest=/etc/sysconfig/SuSEfirewall2 state=absent line='FW_SERVICES_EXT_TCP="ssh"' 
 

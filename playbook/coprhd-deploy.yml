@@ -28,26 +28,28 @@
     get_url: url=http://download.opensuse.org/repositories/home:/luizluca/openSUSE_13.2/x86_64/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm dest=/root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm 
   
   - name: unstall redsocks if already installed 
-    zypper: name=/root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm state=absent
+    zypper: name=/root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm state=present
  
   - name: enable  SuSEfirewall2
     service:  name=SuSEfirewall2 enabled=yes state=started 
   
   - name: disbale Susefirewall2
     service: name=SuSEfirewall2 enabled=no
-  - name: install redsocks
-    command: rpm -Uvh /root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm
+
+  # - name: install redsocks
+  #   command: rpm -Uvh /root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm
+
 #   The following command doesn't work, so use the the above to work around
 #   zypper: name=/root/redsocks-0.4.99_2e3f648-8.1.x86_64.rpm state=present disable_gpg_check=yes disable_recommends=yes
 
-#   - name: copy iptables
-#     copy: src=iptable-rules.sh dest=/root/iptable-rules.sh 
+  - name: copy iptables
+    copy: src=iptable-rules.sh dest=/root/iptable-rules.sh 
 
-#   - name: set up iptable rules
-#     command: bash iptable-rules.sh
+  - name: set up iptable rules
+    command: bash iptable-rules.sh
 
-#   - name: copy redsocks.conf
-#     copy: src=redsocks.conf dest=/etc/redsocks/redsocks.conf backup=yes
+  - name: copy redsocks.conf
+    copy: src=redsocks.conf dest=/etc/redsocks/redsocks.conf backup=yes
  
   - name: restart ressocks service
     service: name=redsocks state=restarted
