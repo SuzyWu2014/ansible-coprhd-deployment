@@ -35,10 +35,16 @@ Usage:
   - Current Status: Build failure occured in portal:playCompile. Working on it...
 
   Possible issues:
-  - proxy issues:
-    solution:
-    - set system-wide proxy -> seem doesn't work
-    - set proxy to each framework used
+  - proxy issues: Still working on it.
+    Failed tries:
+    - set system-wide proxy (set env variables)
+    - use redsocks, doesn't compatible with osu proxy server
+    - set proxy to gradle -> failed at play:compile; still dependency module missing
+    - set gradle to play configuration file -> doesn't work 
+
+    - next step:
+      - play plugin configuration
+      - ivy configuration 
 
   
 
