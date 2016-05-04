@@ -10,6 +10,7 @@ cat >> /etc/hosts <<EOL
 
 #Vmware environment nodes
 10.193.19.243  coprhd-ingestion
+10.193.17.135  coprhd-master
 EOL
 
 echo "[coprhd]
