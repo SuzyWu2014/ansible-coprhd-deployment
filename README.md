@@ -41,12 +41,14 @@ Usage:
     - use redsocks, doesn't compatible with osu proxy server
     - set proxy to gradle -> failed at play:compile; still dependency module missing
     - set gradle to play configuration file -> doesn't work 
+    - directly call play deps with proxy -> failed with artifact not found
+    - directly install deadbolt -> failed with module not found 
 
     - next step:
       - play plugin configuration
       - ivy configuration 
-
-  
+      - modify play implementation script to debug 
+      - figure how gradle, ivy and play work with each other
 
   Note:
 
