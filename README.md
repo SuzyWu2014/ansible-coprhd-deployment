@@ -43,6 +43,7 @@ Usage:
     - set gradle to play configuration file -> doesn't work 
     - directly call play deps with proxy -> failed with artifact not found
     - directly install deadbolt -> failed with module not found 
+    - store deadbolt in local directory, and configure play to use local repo
 
     - next step:
       - play plugin configuration
