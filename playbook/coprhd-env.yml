@@ -2,7 +2,7 @@
 # This file configures OpenSuse environment for CoprHD using the provided scripts in CoprHD repo
 ########################################################################################################
 ---
-- hosts: all
+- hosts: coprhd
   sudo: yes
   gather_facts: no
   remote_user: root
