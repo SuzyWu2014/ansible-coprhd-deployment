@@ -27,9 +27,10 @@
 
   - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  - command: zypper update -y
+  - name: zypper update
+    command: zypper update -y
 
-  - name: install Packages
+  - name: install Packages 
     zypper: name=ant disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=apache2-mod_perl disable_gpg_check=yes disable_recommends=yes state=present
@@ -52,10 +53,10 @@
 
   - zypper: name=dhcpcd disable_gpg_check=yes disable_recommends=yes state=present
 
-# remove docker 
-  - zypper: name=docker disable_gpg_check=yes disable_recommends=yes state=absent
+  # remove docker 
+  # - zypper: name=docker disable_gpg_check=yes disable_recommends=yes state=absent
 
-  - zypper: name=docker-compose disable_gpg_check=yes disable_recommends=yes state=absent
+  # - zypper: name=docker-compose disable_gpg_check=yes disable_recommends=yes state=absent
 
   - zypper: name=expect disable_gpg_check=yes disable_recommends=yes state=present
 
@@ -287,10 +288,8 @@
 
   - zypper: name=zlib-devel disable_gpg_check=yes disable_recommends=yes state=present
   
-  # - name: install squid proxy
-  #   zypper: name=squid disable_gpg_check=yes disable_recommends=yes state=present
   # docker - not needed
-  - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=absent
+  # - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=absent
 
   - zypper: name=http://download.opensuse.org/update/13.2/src/lvm2-2.02.98-43.24.1.src.rpm disable_gpg_check=yes state=present
 

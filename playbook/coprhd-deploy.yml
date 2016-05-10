@@ -7,7 +7,8 @@
   tasks:
 
   - name: git clone coprhd repo
-    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no clone=yes force=yes
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no clone=yes 
+    # version=3d29e523932
     
   - name: go to coprhd-controller folder and build rpm   
     command: chdir=/root/coprhd-controller make clobber BUILD_TYPE=oss rpm
@@ -17,5 +18,8 @@
 
   - name: install coprhd rpm
     command: rpm -Uvh /root/coprhd-controller/build/RPMS/x86_64/*.rpm
+    register: output
+
+  - debug: msg="{{output.stdout}}"
 
 
