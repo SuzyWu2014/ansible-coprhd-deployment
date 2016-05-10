@@ -1,5 +1,6 @@
 coprhd-ingestion ansible_ssh_host=10.193.19.243 ansible_user=root
 coprhd-master    ansible_ssh_host=10.193.17.135 ansible_user=root
+
 [coprhd]
 coprhd-master
 

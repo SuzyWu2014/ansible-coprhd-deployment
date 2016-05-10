@@ -5,12 +5,6 @@
   remote_user: root
 
   tasks:
-
-  - name: install git
-    zypper: name=git state=present disable_recommends=yes 
-
-  - name: intall make
-    zypper: name=make state=present disable_recommends=yes
   
   - name: intall repositories
     zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes refresh=yes
@@ -33,9 +27,7 @@
 
   - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
 
-  # - zypper_repository: name=scalpel4k-opensuse repo=http://download.opensuse.org/repositories/home:/scalpel4k/openSUSE_Factory state=present disable_gpg_check=yes refresh=yes
-
-  # - zypper_repository: name=VirtualBox-for-openSUSE13.2 repo=http://download.virtualbox.org/virtualbox/rpm/opensuse/13.2 state=present disable_gpg_check=yes refresh=yes
+  - command: zypper update -y
 
   - name: install Packages
     zypper: name=ant disable_gpg_check=yes disable_recommends=yes state=present
