@@ -6,10 +6,10 @@
 #####################################################################################
 sudo easy_install pip
 sudo pip install --upgrade pip
-sudo pip install ansible
+# sudo pip install ansible
 
 #the latest development version:
-#pip install git+git://github.com/ansible/ansible.git@devel
+sudo pip install git+git://github.com/ansible/ansible.git@devel
 
 ssh-keygen -t rsa -b 2048
 

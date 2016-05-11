@@ -1,0 +1,5 @@
+coprhd-public    ansible_ssh_host=128.193.4.109  ansible_user=root
+[coprhd]
+coprhd-public
+
+[coprhd:vars]
