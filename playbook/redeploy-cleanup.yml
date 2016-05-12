@@ -11,3 +11,8 @@
 
   - name: clean up /data
     file: path=/data state=absent
+
+  - name: git clone coprhd repo
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes 
+
+

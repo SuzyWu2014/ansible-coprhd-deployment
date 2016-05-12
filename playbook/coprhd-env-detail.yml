@@ -188,6 +188,8 @@
 
   - zypper: name=plymouth disable_gpg_check=yes disable_recommends=yes state=present
 
+  - zypper: name=python disable_gpg_check=yes disable_recommends=yes state=latest
+
   - zypper: name=python-cjson disable_gpg_check=yes disable_recommends=yes state=present
 
   - zypper: name=python-devel disable_gpg_check=yes disable_recommends=yes state=present
@@ -269,45 +271,46 @@
   - name: install strongswan
     command: zypper --non-interactive --no-gpg-checks install --details --no-recommends --force-resolution strongswan strongswan-ipsec strongswan-libs0
   
-  might cause problem
-  - name: install old Packages
-    command: zypper --non-interactive --no-gpg-checks install --oldpackage libudev1=210.1448627060.53ee915-25.27.1 
+  # might cause problem
+  # - name: install old Packages
+  #   command: zypper --non-interactive --no-gpg-checks install --oldpackage libudev1=210.1448627060.53ee915-25.27.1 
 
-  - command: zypper --non-interactive --no-gpg-checks install --oldpackage udev=210.1448627060.53ee915-25.27.1  
+  # - command: zypper --non-interactive --no-gpg-checks install --oldpackage udev=210.1448627060.53ee915-25.27.1  
 
   #######################################################################################
   #--------------------needs more ansile zypper module support-----------------------
   #######################################################################################
-  - zypper: name=libsoup-2.4.so.1 disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=libsoup-2.4.so.1 disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=strongswan-libs0 disable_gpg_check=yes disable_recommends=yes state=present 
+  # - zypper: name=strongswan-libs0 disable_gpg_check=yes disable_recommends=yes state=present 
 
-  - zypper: name=strongswan-ipsec disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=strongswan-ipsec disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=strongswan disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=strongswan disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
-  - name: install libvpx1
-    zypper: name=http://rpm.pbone.net/index.php3/stat/26/dist/97/size/1767471/name/libvpx-1.3.0-2.1.2.src.rpm disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=http://download.opensuse.org/update/13.2/src/systemd-210.1448627060.53ee915-25.27.1.src.rpm disable_gpg_check=yes state=present
+  # - name: install libvpx1
+  #   zypper: name=http://rpm.pbone.net/index.php3/stat/26/dist/97/size/1767471/name/libvpx-1.3.0-2.1.2.src.rpm disable_gpg_check=yes disable_recommends=yes state=present
 
-  docker 
-  - zypper: name=docker disable_gpg_check=yes disable_recommends=yes state=present
+  # # docker 
+  # - zypper: name=docker disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=docker-compose disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=docker-compose disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=present
+  # - zypper: name=http://download.opensuse.org/update/13.2/src/docker-1.8.3-43.1.src.rpm disable_gpg_check=yes state=present
 
-  - name: install xorg-x11-server 
-    zypper: name=xorg-x11-server disable_gpg_check=yes disable_recommends=no state=present
-  - command: zypper install xorg-x11-server -2
+  # - name: install xorg-x11-server 
+  #   zypper: name=xorg-x11-server disable_gpg_check=yes disable_recommends=no state=present
 
-  disable virtualbox
-  - name: install virtualbox
-    zypper: name=virtualbox disable_gpg_check=yes disable_recommends=yes state=present
+  # - command: zypper install xorg-x11-server -2
 
-  - zypper: name=virtualbox-guest-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
+  # # disable virtualbox
+  # - name: install virtualbox
+  #   zypper: name=virtualbox disable_gpg_check=yes disable_recommends=yes state=present
 
-  - zypper: name=virtualbox-host-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
+  # - zypper: name=virtualbox-guest-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
+
+  # - zypper: name=virtualbox-host-kmp-default disable_gpg_check=yes disable_recommends=yes state=present
 
   ############################################################################
   #
@@ -335,18 +338,18 @@
 
   # - get_url: url=http://nginx.org/download/nginx-1.6.2.tar.gz dest=/tmp/nginx/nginx-1.6.2.tar.gz
 
-  - get_url: url=https://github.com/yaoweibin/nginx_upstream_check_module/archive/v0.3.0.tar.gz dest=/tmp/nginx/v0.3.0.tar.gz
+  # - get_url: url=https://github.com/yaoweibin/nginx_upstream_check_module/archive/v0.3.0.tar.gz dest=/tmp/nginx/v0.3.0.tar.gz
   
-  - get_url: url=https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz dest=/tmp/nginx/v0.25.tar.gz
+  # - get_url: url=https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz dest=/tmp/nginx/v0.25.tar.gz
 
   - unarchive: src=http://nginx.org/download/nginx-1.6.2.tar.gz dest=/tmp/nginx copy=no
 
-  # - unarchive: src=http://github.com/yaoweibin/nginx_upstream_check_module/archive/v0.3.0.tar.gz dest=/tmp/nginx copy=no  
+  - unarchive: src=https://github.com/yaoweibin/nginx_upstream_check_module/archive/v0.3.0.tar.gz dest=/tmp/nginx copy=no  
 
-  # - unarchive: src=http://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz dest=/tmp/nginx copy=no
-  - unarchive: src=/tmp/nginx/v0.3.0.tar.gz dest=/tmp/nginx copy=no  
+  - unarchive: src=https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz dest=/tmp/nginx copy=no
+  # - unarchive: src=/tmp/nginx/v0.3.0.tar.gz dest=/tmp/nginx copy=no  
 
-  - unarchive: src=/tmp/nginx/v0.25.tar.gz dest=/tmp/nginx copy=no
+  # - unarchive: src=/tmp/nginx/v0.25.tar.gz dest=/tmp/nginx copy=no
 
   - patch: >
       src=/tmp/nginx/nginx_upstream_check_module-0.3.0/check_1.5.12+.patch
