@@ -7,10 +7,9 @@
   tasks:
 
   - name: git clone coprhd repo
-    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=no clone=yes 
-    # version=3d29e523932
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes  version=de6886429da0d9c523fbd551952a4bf933ee5eed
     
-  - name: go to coprhd-controller folder and build rpm   
+  - name: go to coprhd-controller folder and build rpm  - takes within 10 mins 
     command: chdir=/root/coprhd-controller make clobber BUILD_TYPE=oss rpm
     register: output
 

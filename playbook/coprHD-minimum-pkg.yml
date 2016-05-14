@@ -1,0 +1,16 @@
+---
+- hosts: coprhd
+  sudo: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+
+# update system
+# zypper -n update
+
+#remove if existing, otherwise python-devel and other install will raise a conflict
+# zypper -n remove patterns-openSUSE-minimal_base-conflicts
+
+#install required packages
+# zypper -n install git gcc-c++ git-core make patch rpm-build telnet keepalived qemu java-1_8_0-openjdk java-1_8_0-openjdk-devel pcre-devel libpcrecpp0 libpcreposix0 libopenssl-devel
