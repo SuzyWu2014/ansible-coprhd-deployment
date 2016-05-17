@@ -23,10 +23,16 @@
 
   - name: execute the script to install Patched Nginx server
     command: bash /root/configure.sh installNginx
+    register: output
+
+  - debug: msg="{{output.stdout}}"   
  
   - name: script to configure java 8
     command: bash /root/configure.sh installJava 8
+    register: output
 
+  - debug: msg="{{output.stdout}}"
+  
   - name: create the storageOS user and group
     command: bash /root/configure.sh installStorageOS
     register: output

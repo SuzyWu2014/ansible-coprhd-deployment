@@ -11,27 +11,27 @@
   #
   ############################################################################
   - name: intall repositories
-    zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes refresh=yes 
+    zypper_repository: name=suse-13.2-oss repo=http://download.opensuse.org/distribution/13.2/repo/oss/suse state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=3 not supported
-  - zypper_repository: name=suse-13.2-oss-update repo=http://download.opensuse.org/repositories/openSUSE:/13.2:/Update/standard state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-oss-update repo=http://download.opensuse.org/repositories/openSUSE:/13.2:/Update/standard state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=3
-  - zypper_repository: name=suse-13.2-non-oss repo=http://download.opensuse.org/distribution/13.2/repo/non-oss/suse state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-non-oss repo=http://download.opensuse.org/distribution/13.2/repo/non-oss/suse state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=99
-  - zypper_repository: name=suse-13.2-monitoring repo=http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes
+  - zypper_repository: name=suse-13.2-monitoring repo=http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=1
-  - zypper_repository: name=suse-13.2-seife repo=http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-seife repo=http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=1
-  - zypper_repository: name=suse-13.2-python repo=http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-python repo=http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=4
-  - zypper_repository: name=suse-13.2-network repo=http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-network repo=http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=4
-  - zypper_repository: name=suse-13.2-building repo=http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-building repo=http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=5
-  - zypper_repository: name=suse-13.2-appliances repo=http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-appliances repo=http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=1
-  - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes 
+  - zypper_repository: name=suse-13.2-containers repo=http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2 state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
     #priority=1
-  - zypper_repository: name=suse-13.2-scalpel4k repo=http://download.opensuse.org/repositories/home:/scalpel4k/openSUSE_Factory/ state=present disable_gpg_check=yes refresh=yes
+  - zypper_repository: name=suse-13.2-scalpel4k repo=http://download.opensuse.org/repositories/home:/scalpel4k/openSUSE_Factory/ state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
 
   - name: zypper update - might take very long time
     command: zypper update -y
@@ -43,6 +43,9 @@
   #  Install Packages
   #
   ############################################################################
+  - name: remove patterns-openSUSE-minimal_base-conflicts
+    zypper: name=patterns-openSUSE-minimal_base-conflicts state=absent
+    
   - name: install Packages 
     zypper: name=ant disable_gpg_check=yes disable_recommends=yes state=present
 
