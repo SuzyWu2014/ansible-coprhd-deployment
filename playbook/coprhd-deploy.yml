@@ -21,4 +21,5 @@
 
   - debug: msg="{{output.stdout}}"
 
-
+  - name: enable root ssh
+    lineinfile: dest=/etc/ssh/sshd_config state=present regexp="^PermitRootLogin" line="PermitRootLogin yes" insertafter="^2m"

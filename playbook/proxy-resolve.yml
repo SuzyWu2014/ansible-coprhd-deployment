@@ -1,5 +1,5 @@
 ---
-- hosts: coprhd-master
+- hosts: coprhd
   sudo: yes
   gather_facts: no
   remote_user: root
@@ -7,12 +7,13 @@
   tasks:
 
   - name: git clone coprhd repo
-    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes force=yes
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes version=de6886429da0d9c523fbd551952a4bf933ee5eed
+
   - name: Set up proxy for gradle
     lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="#proxy"
 
   - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.proxySet=true"
-  - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.http.proxyHost=proxy.oregonstate.edu"
+  - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.http.proxyHost=proxy.somewhere"
   - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.http.proxyPort=3128"
-  - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.https.proxyHost=proxy.oregonstate.edu"
+  - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.https.proxyHost=proxy.somewhere"
   - lineinfile: dest=/root/coprhd-controller/gradle.properties state=present line="systemProp.https.proxyPort=3128"

@@ -5,7 +5,7 @@
   remote_user: root
 
   tasks:
-
+  
   - name: remove storageos
     zypper: name=storageos state=absent
 
@@ -14,5 +14,3 @@
 
   - name: remove repo
     file: path=/root/coprhd-controller state=absent
-
-
