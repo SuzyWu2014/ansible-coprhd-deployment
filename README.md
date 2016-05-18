@@ -1,14 +1,15 @@
 # ansible-coprhd-deployment
 
 ## Description: 
-  This repository aims to deploy CoprHD on the remote host(hosting on vmware in my case), and deploy ScaleIO driver onto it after that. Please refer to https://coprhd.github.io/ for more information.
+  Please refer to https://coprhd.github.io/ for CoprHD.
+
   Two nodes:
     Local: Mac OSX
     Remote: OpenSuse 13.2 
 
 ## Prerequisites:
  - Remote CorpHD Host: OpenSuse 13.2
- - Make sure you are able to ssh onto your coprHD host using root as username
+ - Make sure you are able to ssh into your coprHD host using root as username
  
 ## Usage:
 
@@ -20,8 +21,8 @@
   + Run `./add-note.sh` to allow ansible ssh access
   
   + Run `ansible all -m ping -i hosts`
-   --> The output will be:
-	coprhd-ingestion | SUCCESS => {
+   --> Varify output:
+	coprhd-public | SUCCESS => {
     	"changed": false,
     	"ping": "pong"
 	}
@@ -35,7 +36,7 @@ ansible all -m ping -i hosts
 
 ### CoprHD Deployment
 
-+ Run playbooks as below:
++ Run playbooks: `ansible-playbook playbook/[playbook] -i hosts`
 
 ```bash
 ansible-playbook playbook/coprhd-env-detail.yml -i hosts
@@ -43,10 +44,10 @@ ansible-playbook playbook/coprhd-deploy.yml -i hosts
 ```
 
 ### Playbooks Quick Look
-  + `coprhd-env.yml`: use scripts provided in the coprHD repo to set up environment for coprHD host.
+  + `coprhd-env.yml`: use the script provided in the coprHD repo to set up environment for coprHD host.
     * modify `ovfenv.properties` file with your own network setting
   
-  + `coprhd-env-local-script.yml`: modified srcipt provided by coprHD, removing some packages: docker, virtualBox. (which cause problem in my environment)
+  + `coprhd-env-local-script.yml`: use modified script provided by CoprHD, removing some packages: docker, virtualBox, etc. (which caused issues in my environment)
    
   + `coprhd-env-detail.yml`: use ansible modules to set up coprHD host environment
     * need modification on ovfenv.properties beforehand
@@ -57,15 +58,16 @@ ansible-playbook playbook/coprhd-deploy.yml -i hosts
     - enable root ssh after deployment
       + Note: login password changed to coprHD password
       
-  + `redeploy-cleanup.yml`: clean up coprhd host before performing redeployment
+  + `redeploy-cleanup.yml`: clean up coprhd host before performing re-deployment
 
-  + `proxy-resolve.yml`: Resolve proxy problem if you deploy coprhd behind a proxy. [On progress]
+  + `proxy-resolve.yml`: Resolve proxy problem if you deploy coprhd behind a proxy.
 
 ### Issues and Solutions 
-  + Fail to ssh
-    * solution: Login into your host, restart the ssh service
 
-### Current issues
+#### Fail to ssh
++ solution: Login into your host, restart the ssh service
++ check /etc/ssh/sshd_config to allow root and password
++ check your firewall
 
 #### proxy issue
 
