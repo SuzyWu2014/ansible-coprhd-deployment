@@ -1,0 +1,22 @@
+---
+- hosts: coprhd
+  sudo: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+
+  - name: apply conf files
+    copy: dest=/opt/storageos/conf/controller-conf.xml src=driver-conf/controller-conf.xml force=yes backup=yes
+
+  - copy: dest=/opt/storageos/conf/discovery-externaldevice-context.xml src=driver-conf/discovery-externaldevice-context.xml force=yes backup=yes
+
+  - copy: dest=/opt/storageos/cli/bin/storagesystem.py src=driver-conf/storagesystem.py force=yes backup=yes
+
+  - copy: dest=/opt/storageos/bin//controllersvc-debug src=driver-conf/controllersvc force=yes backup=yes
+
+  - name: get driver jar
+    get_url: url=https://coprhd.atlassian.net/wiki/download/attachments/13205537/scaleiodriver.jar?api=v2 dest=/opt/storageos/lib/scaleiodriver.jar
+
+  - name: restart the service
+    service: name=/etc/storageos/storageos state=restarted
