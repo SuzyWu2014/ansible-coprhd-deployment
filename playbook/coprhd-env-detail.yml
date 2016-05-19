@@ -37,7 +37,7 @@
     command: zypper update -y
   
   - name: refresh repository
-    command: zypper refresh -f upd
+    command: zypper refresh 
   ############################################################################
   #
   #  Install Packages
