@@ -1,0 +1,21 @@
+---
+- hosts: coprhd
+  sudo: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+
+    - name: fetch controller-conf.xml
+      fetch: src=/opt/storageos/conf/controller-conf.xml dest=driver-conf/controller-conf.xml
+
+    - name: fetch discovery-externaldevice-context.xml
+      fetch: src=/opt/storageos/conf/discovery-externaldevice-context.xml dest=driver-conf/discovery-externaldevice-context.xml
+
+    - name: fetch /opt/storageos/cli/bin/storagesystem.py
+      fetch: src=/opt/storageos/cli/bin/storagesystem.py dest=driver-conf/storagesystem.py
+
+    - name: fetch controllersvc
+      fetch: src=/opt/storageos/bin//controllersvc-debug dest=driver-conf/controllersvc
+
+    
