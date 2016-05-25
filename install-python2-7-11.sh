@@ -1,3 +1,4 @@
+zypper update 
 zypper remove python
 zypper install gcc
 zypper install make
@@ -8,3 +9,9 @@ cd Python-2.7.11/
 make
 su root
 make install
+
+sudo update-alternatives --remove-all python
+update-alternatives --install /usr/bin/python python /usr/local/bin/python2.7 2
+export PATH="/usr/local/bin:$PATH"
+
+

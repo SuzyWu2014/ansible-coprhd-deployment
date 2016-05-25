@@ -65,7 +65,7 @@ ansible-playbook playbook/coprhd-deploy.yml -i hosts
 ### Issues and Solutions 
 
 #### import error: No module named ****
-+ try to reinstall python `zypper in f python`
++ zypper install python-setuptools
 
 #### Fail to ssh
 + solution: Login into your host, restart the ssh service
