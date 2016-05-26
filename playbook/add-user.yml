@@ -21,9 +21,9 @@
 
   - lineinfile: dest=/etc/ssh/sshd_config state=present line="AllowUsers {{ sudoers }} root"
 
-  - authorized_key: user={{ sudoers }}
-                    key="{{ lookup('file', '/Users/shujinwu/.ssh/id_rsa.pub') }}"
-                    state=present
+  # - authorized_key: user={{ sudoers }}
+  #                   key="{{ lookup('file', '/Users/shujinwu/.ssh/id_rsa.pub') }}"
+  #                   state=present
 
   - name: restart ssh service
     service: name=sshd state=restarted
