@@ -40,6 +40,10 @@ ansible all -m ping -i hosts
 
 ```bash
 ansible-playbook playbook/coprhd-env-detail.yml -i hosts
+ansible-playbook playbook/add-user.yml -i hosts
+ssh root@XX.XX.XX.XX
+sudo passwd newUser
+exit
 ansible-playbook playbook/coprhd-deploy.yml -i hosts
 ```
 
@@ -62,6 +66,10 @@ ansible-playbook playbook/coprhd-deploy.yml -i hosts
 
   + `proxy-resolve.yml`: Resolve proxy problem if you deploy coprhd behind a proxy.
 
+  + `add-user.yml`: add an extra user to the system for ssh.
+    * Note: after coprHD deployment, system will be set to not allow root ssh.
+    * after running this playbook, make sure login into system as root, to update the password for the new user.
+    
 ### Issues and Solutions 
 
 #### import error: No module named ****
