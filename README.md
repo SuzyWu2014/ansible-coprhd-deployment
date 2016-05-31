@@ -32,6 +32,7 @@
 vi hosts 
 ./add-note.sh
 ansible all -m ping -i hosts 
+ansible-playbook playbook/add-user.yml -i hosts 
 ```
 
 ### CoprHD Deployment
@@ -46,6 +47,82 @@ sudo passwd newUser
 exit
 ansible-playbook playbook/coprhd-deploy.yml -i hosts
 ```
+
+### ScaleIO driver deployment
+
+``` bash 
+ansible-playbook playbook/retrieve-driver-configuration-files.yml -i hosts
+ansible-playbook playbook/scaleio-driver-deployment.yml -i hosts
+```
+
+#### Configurations
++ controller-conf.xml 
+  * line 403: add the following bean or uncomment it's if already there.
+``` xml
+<!-- Driver class for scaleio block storage driver -->
+<bean id="scaleioStorageDriver" class="com.emc.storageos.driver.scaleio.ScaleIOStorageDriver">
+</bean>
+```
+  
+  * line 396: add scaleiosystem entry
+```xml 
+  <bean id="externalBlockStorageDevice" class="com.emc.storageos.volumecontroller.impl.externaldevice.ExternalBlockStorageDevice">
+      <property name="dbClient" ref="dbclient"/>
+      <property name="locker" ref="locker"/>
+      <property name="exportMaskOperationsHelper" ref="externalDeviceExportMaskOperationsHelper"/>
+      <!-- Block storage drivers -->
+      <property name="drivers">
+          <map>
+              
+              <entry key="scaleiosystem" value-ref="scaleioStorageDriver"/>
+              
+              <entry key="driversystem" value-ref="storageDriverSimulator"/>
+          </map>
+      </property>
+  </bean>
+```
+
++ discovery-externaldevice-context.xml 
+  * line 8: add following bean 
+```xml 
+ <bean id="scaleioDriver" class="com.emc.storageos.driver.scaleio.ScaleIOStorageDriver">
+ </bean>
+```
+  
+  * line 17: add scaleiosystem entry
+```xml 
+     <bean id="externaldevice" class="com.emc.storageos.volumecontroller.impl.plugins.ExternalDeviceCommunicationInterface">
+         <!-- Discovery storage drivers -->
+         <property name="drivers">
+             <map>
+                <entry key="scaleiosystem" value-ref="scaleioDriver"/>
+                <entry key="driversystem" value-ref="storageDriverSimulator"/>
+            </map>
+        </property>
+    </bean>
+
+```
+
++ storagesystem.py 
+  * line 91: add "scaleiosystem" to the list
+```python 
+    CREATE_SYSTEM_TYPE_LIST = [
+        'scaleiosystem',
+        'isilon',
+        'vnxblock',
+        'vmax',
+        'vnxfile',
+        'netapp',
+        'hds',
+        'openstack',
+        'ibmxiv',
+        'netappc',
+        'ecs' , 
+        'vnxe']
+```
+
++ controllersvc-debug
+  * add `:${LIB_DIR}/scaleiodriver.jar"` to the end of classpath
 
 ### Playbooks Quick Look
   + `coprhd-env.yml`: use the script provided in the coprHD repo to set up environment for coprHD host.
