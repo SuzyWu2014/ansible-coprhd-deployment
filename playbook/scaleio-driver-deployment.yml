@@ -7,16 +7,16 @@
   tasks:
 
   - name: apply conf files
-    copy: dest=/opt/storageos/conf/controller-conf.xml src=driver-conf/controller-conf.xml force=yes backup=yes
+    copy: dest=/opt/storageos/conf/controller-conf.xml src=driver-conf/controller-conf.xml/coprhd-public/opt/storageos/conf/controller-conf.xml force=yes backup=yes
 
-  - copy: dest=/opt/storageos/conf/discovery-externaldevice-context.xml src=driver-conf/discovery-externaldevice-context.xml force=yes backup=yes
+  - copy: dest=/opt/storageos/conf/discovery-externaldevice-context.xml src=driver-conf/discovery-externaldevice-context.xml/coprhd-public/opt/storageos/conf/discovery-externaldevice-context.xml force=yes backup=yes
 
-  - copy: dest=/opt/storageos/cli/bin/storagesystem.py src=driver-conf/storagesystem.py force=yes backup=yes
+  - copy: dest=/opt/storageos/cli/bin/storagesystem.py src=driver-conf/storagesystem.py/coprhd-public/opt/storageos/cli/bin/storagesystem.py force=yes backup=yes
 
-  - copy: dest=/opt/storageos/bin//controllersvc-debug src=driver-conf/controllersvc force=yes backup=yes
+  - copy: dest=/opt/storageos/bin/controllersvc src=driver-conf/controllersvc/coprhd-public/opt/storageos/bin/controllersvc-debug force=yes backup=yes
 
   - name: get driver jar
     get_url: url=https://coprhd.atlassian.net/wiki/download/attachments/13205537/scaleiodriver.jar?api=v2 dest=/opt/storageos/lib/scaleiodriver.jar
 
   - name: restart the service
-    service: name=/etc/storageos/storageos state=restarted
+    command: /etc/storageos/storageos restart
