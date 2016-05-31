@@ -3,6 +3,9 @@
   sudo: yes
   gather_facts: no
   remote_user: root
+  vars:
+    sudoers:
+      shujin
 
   tasks:
 
@@ -25,6 +28,8 @@
     lineinfile: dest=/etc/ssh/sshd_config state=present regexp="^PermitRootLogin" line="PermitRootLogin yes" insertafter="^2m"
 
   - lineinfile: dest=/etc/ssh/sshd_config regexp='^PasswordAuthentication' line="PasswordAuthentication yes"  state=present
+
+  - lineinfile: dest=/etc/ssh/sshd_config state=present line="AllowUsers {{ sudoers }} root svcuser storageos"
 
   - name: restart ssh service
     service: name=sshd state=restarted
