@@ -32,18 +32,19 @@
 vi hosts 
 ./add-note.sh
 ansible all -m ping -i hosts 
-ansible-playbook playbook/add-user.yml -i hosts 
 ```
 
 ### CoprHD Deployment
 
++ Modify user name in `add-user.yml`
++ Modify network setting in `ovfenv.properties`
 + Run playbooks: `ansible-playbook playbook/[playbook] -i hosts`
 
 ```bash
 ansible-playbook playbook/coprhd-env-detail.yml -i hosts
 ansible-playbook playbook/add-user.yml -i hosts
 ssh root@XX.XX.XX.XX
-sudo passwd newUser
+sudo passwd [newUser]
 exit
 ansible-playbook playbook/coprhd-deploy.yml -i hosts
 ```
