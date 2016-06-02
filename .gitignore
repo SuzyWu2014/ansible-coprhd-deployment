@@ -1,1 +1,3 @@
 playbook/*.retry
+
+.DS_Store
