@@ -157,6 +157,7 @@ ansible-playbook playbook/scaleio-driver-deployment.yml -i hosts
 + solution: Login into your host, restart the ssh service
 + check /etc/ssh/sshd_config to allow root and password
 + check your firewall
++ restart the host
 
 #### proxy issue
 

@@ -7,7 +7,8 @@
   tasks:
   
   - name: remove storageos
-    zypper: name=storageos state=absent
+    command: rpm -e storageos
+    # zypper: name=storageos state=absent
 
   - name: clean up /data
     file: path=/data state=absent
