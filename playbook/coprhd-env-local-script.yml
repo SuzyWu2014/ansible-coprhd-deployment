@@ -1,6 +1,6 @@
 ---
 - hosts: coprhd
-  sudo: yes
+  become: yes
   gather_facts: no
   remote_user: root
 
@@ -25,14 +25,14 @@
     command: bash /root/configure.sh installNginx
     register: output
 
-  - debug: msg="{{output.stdout}}"   
- 
+  - debug: msg="{{output.stdout}}"
+
   - name: script to configure java 8
     command: bash /root/configure.sh installJava 8
     register: output
 
   - debug: msg="{{output.stdout}}"
-  
+
   - name: create the storageOS user and group
     command: bash /root/configure.sh installStorageOS
     register: output
@@ -40,4 +40,4 @@
   - debug: msg="{{output.stdout}}"
 
   - name: copy ovfenv.properties
-    copy: src=ovfenv.properties dest=/etc/ovfenv.properties 
+    copy: src=ovfenv.properties dest=/etc/ovfenv.properties
