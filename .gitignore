@@ -3,4 +3,4 @@ setup/.vagrant
 plays/*.retry
 
 .DS_Store
-.test_hosts
+test_hosts
