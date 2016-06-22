@@ -11,4 +11,4 @@
     - install-java-8
     - install-patched-nginx-server
     - create-storageos-user
-    - {role: create-network-conf, host_ip: "128.193.4.109", gateway: "128.193.4.1", netmask: "255.255.254.0"}
+    - {role: create-network-conf, host_ip: "X.X.X.X", gateway: "X.X.X.X", netmask: "X.X.X.X"}
