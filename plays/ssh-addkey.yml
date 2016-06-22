@@ -5,4 +5,3 @@
 
   roles:
     - { role: install-ssh-key, user: root }
-    - minimum-python-requirement

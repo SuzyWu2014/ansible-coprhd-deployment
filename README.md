@@ -44,14 +44,18 @@ ansible coprhd -m ping -i hosts
 ansible-playbook plays/add-user.yml -i hosts  #just in case you can't ssh into your coprhd host after deployment
 ansible-playbook plays/coprhd-env-setup.yml -i hosts
 ansible-playbook plays/coprhd-deploy.yml -i hosts --tags master-branch
+
+ansible-playbook plays/coprhd-uninstall.yml -i hosts # run this before re-deploy coprhd
 ```
+
+note: the version of master-branch is fixed (it's a guaranteed working version), you can replace the commitId it in `plays/coprhd-deploy.yml`
 
 ### ScaleIO driver deployment
 
 Note: the version of master branch that is  used in this repo doesn't have the fully support of southbound SDK, namely, the scaleIO driver is not fully functioning if deployed to master branch.
 
 ``` bash
-ansible-playbook plays/coprhd-deploy.yml -i hosts --tags ingestion-branch` # the current lastest branch doesn't work
+ansible-playbook plays/coprhd-deploy.yml -i hosts --tags ingestion-branch # the current lastest branch doesn't work
 ansible-playbook plays/fetch-driver.confs.yml -i hosts
 vi [conf-file]
 ansible-playbook plays/scaleio-driver-deployment.yml -i hosts

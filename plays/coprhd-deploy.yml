@@ -7,7 +7,8 @@
       shujin
 
   roles:
-    - git-clone-coprhd-repo
+    - {role: git-clone-coprhd-repo, commit: "de6886429da0d9c523fbd551952a4bf933ee5eed"}
     - {role: build-coprhd-rpm, tags: ["master-branch", "ingestion-branch"]}
     - {role: install-coprhd-rpm, tags: ["master-branch", "ingestion-branch"]}
     - {role: enable-ssh, tags: ["master-branch", "ingestion-branch"]}
+    - {role: install-ssh-key, user: root, tags: ["master-branch", "ingestion-branch"]}

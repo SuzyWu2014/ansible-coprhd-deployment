@@ -8,5 +8,5 @@
 
   roles:
     - {role: add-user, pwd: "$6$rounds=656000$rkyJ5V1IDS0u2wM4$6jj4r3gEMpQw6ZHWIm9G4x9R3CEeBH3TMJ8BSfLawFrQZONut7wTYvVzKeqQFPD0uBQTxlO4CtzeI.Dl4Atb2."}
-    - sudoers-conf
+    - conf-sudoers
     - enable-ssh

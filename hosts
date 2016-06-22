@@ -1,3 +1,4 @@
-coprhd-public    ansible_ssh_host=X.X.X.X  ansible_user=root
+coprhd-public   ansible_ssh_host=X.X.X.X    ansible_user=root
+
 [coprhd]
 coprhd-public

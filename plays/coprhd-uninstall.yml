@@ -4,4 +4,4 @@
   remote_user: root
 
   roles:
-    - coprhd-clean-up
+    - uninstall-coprhd

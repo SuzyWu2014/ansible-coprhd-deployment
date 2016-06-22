@@ -1,11 +1,11 @@
 ---
   - name: enable root ssh
-    lineinfile: dest=/etc/ssh/sshd_config state=present regexp="^PermitRootLogin" line="PermitRootLogin yes" insertafter="^2m"
+    lineinfile: dest=/etc/ssh/sshd_config state=present regexp="^#*\s*PermitRootLogin" line="PermitRootLogin yes"  state=present backup=yes
 
-  - lineinfile: dest=/etc/ssh/sshd_config regexp='^PasswordAuthentication' line="PasswordAuthentication yes"  state=present backup=yes
+  - lineinfile: dest=/etc/ssh/sshd_config regexp='^PasswordAuthentication' line="PasswordAuthentication yes"  state=present
 
   - lineinfile: dest=/etc/ssh/sshd_config regexp='^UsePAM' line="UsePAM no"  state=present
 
-  - lineinfile: dest=/etc/ssh/sshd_config state=present line="AllowUsers {{ sudoers }} root svcuser storageos"
+  - lineinfile: dest=/etc/ssh/sshd_config state=present regexp="^AllowUsers" line="AllowUsers {{ sudoers }} root svcuser storageos"
     notify:
       - restart ssh
