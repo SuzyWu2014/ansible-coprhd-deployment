@@ -13,31 +13,34 @@
 
 ## Usage:
 
+### Configurations
+
+#### Config the remote host you will be used to deploy CoprHD
+
++ Edit `hosts` file to specify your remote hosts; all playbooks in this repo work with hosts under group - [coprhd]
+  * Replace "X.X.X.X" with the ip address of your remote hosts
++ Edit host ip/gateway/netmask in `plays/coprhd-env-setup.yml`
++ replace username "shujin" in `plays/add-user.yml` with the your desired name( default password for the user: p@ssw0rd)
+
+#### Config coprHD repo
+
++ Replace the commit id "de6886429da0d9c523fbd551952a4bf933ee5eed" with the one you want to deploy. Highly recommend that you deploy with the default one, since it's guaranteed working.
+
 ### Ansible Set Up
-  + Run `.setup/mac-mgmt-node.sh` to install ansible and generate keygen in your mac; for ubuntu, run `.setup/ubuntu-mgmt-node.sh `
-
-  + Edit `hosts` file to specify your remote hosts; all playbooks in this repo work with hosts under group - [coprhd]
-
-  + Run 'ssh-addkey.yml` to upload ssh key to remote host
-
-  + Run `ansible coprhd -m ping -i hosts`
-   --> Varify output:
-	coprhd-public | SUCCESS => {
-    	"changed": false,
-    	"ping": "pong"
-	}
 
 ```bash
 .setup/mac-mgmt-node.sh
-vi hosts
 ansible-playbook plays/ssh-addkey.yml -i hosts --ask-pass # your root password
 ansible coprhd -m ping -i hosts
 ```
+   --> Varify output:
+  coprhd-public | SUCCESS => {
+      "changed": false,
+      "ping": "pong"
+  }
 
 ### CoprHD Deployment
 
-+ Modify user name in `plays/add-user.yml` ( default password for the user: p@ssw0rd)
-+ Modified host ip/gateway/netmask in `plays/coprhd-env-setup.yml`
 + Run playbooks: `ansible-playbook plays/[playbook] -i hosts`
 
 ```bash
@@ -47,8 +50,6 @@ ansible-playbook plays/coprhd-deploy.yml -i hosts --tags master-branch
 
 ansible-playbook plays/coprhd-uninstall.yml -i hosts # run this before re-deploy coprhd
 ```
-
-note: the version of master-branch is fixed (it's a guaranteed working version), you can replace the commitId it in `plays/coprhd-deploy.yml`
 
 ### ScaleIO driver deployment
 
@@ -61,7 +62,7 @@ vi [conf-file]
 ansible-playbook plays/scaleio-driver-deployment.yml -i hosts
 ```
 
-#### Configurations
+#### Driver Configurations
 + controller-conf.xml
   * line 403: add the following bean or uncomment it's if already there.
 ``` xml
