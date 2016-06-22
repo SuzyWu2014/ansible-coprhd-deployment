@@ -88,6 +88,7 @@ class StorageSystem(object):
     OBJECT_SYSTEM_LIST =['ecs']
 
     CREATE_SYSTEM_TYPE_LIST = [
+        'scaleiosystem',
         'isilon',
         'vnxblock',
         'vmax',

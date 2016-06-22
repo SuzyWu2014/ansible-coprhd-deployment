@@ -1,6 +1,6 @@
 ---
   - name: apply conf files
-    copy: dest={{item.dst}} src=/Users/shujinwu/tmp/{{item.src}} force=yes backup=yes
+    copy: dest={{item.dst}} src=../driver-confs/{{item.src}} force=yes backup=yes
     with_items:
       - {dst: "/opt/storageos/conf/controller-conf.xml", src: "controller-conf.xml"}
       - {dst: "/opt/storageos/conf/discovery-externaldevice-context.xml", src: "discovery-externaldevice-context.xml"}
