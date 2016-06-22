@@ -2,3 +2,4 @@ coprhd-public   ansible_ssh_host=128.193.4.109    ansible_user=root
 
 [coprhd]
 coprhd-public
+# - {role: create-network-conf, host_ip: "128.193.4.109", gateway: "128.193.4.1", netmask: "255.255.254.0"}
