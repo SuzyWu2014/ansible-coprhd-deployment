@@ -8,5 +8,5 @@
       - {dst: "/opt/storageos/bin/controllersvc", src: "controllersvc"}
 
   - name: get driver jar
-    get_url: url=https://coprhd.atlassian.net/wiki/download/attachments/13205537/scaleiodriver.jar?api=v2 dest=/opt/storageos/lib/scaleiodriver.jar
+    get_url: url=https://coprhd.atlassian.net/wiki/download/attachments/13205537/scaleiodriver.jar?version=59&amp;modificationDate=1460491315969&amp;api=v2 dest=/opt/storageos/lib/scaleiodriver.jar force=yes
     notify: restart coprhd service
