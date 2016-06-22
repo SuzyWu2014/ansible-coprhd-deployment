@@ -1,0 +1,12 @@
+---
+  - name: fetch controller-conf.xml
+    fetch: src=/opt/storageos/conf/controller-conf.xml dest=/Users/shujinwu/tmp/controller-conf.xml flat=yes
+
+  - name: fetch discovery-externaldevice-context.xml
+    fetch: src=/opt/storageos/conf/discovery-externaldevice-context.xml dest=/Users/shujinwu/tmp/discovery-externaldevice-context.xml flat=yes
+
+  - name: fetch /opt/storageos/cli/bin/storagesystem.py
+    fetch: src=/opt/storageos/cli/bin/storagesystem.py dest=/Users/shujinwu/tmp/storagesystem.py flat=yes
+
+  - name: fetch controllersvc
+    fetch: src=/opt/storageos/bin//controllersvc-debug dest=/Users/shujinwu/tmp/controllersvc flat=yes

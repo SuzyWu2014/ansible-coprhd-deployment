@@ -5,7 +5,7 @@
 
   Two nodes:
     Local: Mac OSX
-    Remote: OpenSuse 13.2
+    Remote: OpenSuse 13.2 (Recommended at least 60GB in root filesystem, 6GB of RAM, otherwise might result in unexpected failure)
 
 ## Prerequisites:
  - Remote CorpHD Host: OpenSuse 13.2
@@ -14,13 +14,13 @@
 ## Usage:
 
 ### Ansible Set Up
-  + Run `./mac-mgmt-node.sh` to install ansible and generate keygen in your mac; for ubuntu, run `./ubuntu-mgmt-node.sh `
+  + Run `.setup/mac-mgmt-node.sh` to install ansible and generate keygen in your mac; for ubuntu, run `.setup/ubuntu-mgmt-node.sh `
 
-  + Edit `hosts` file to specify your remote hosts; all playbooks in this repo works with hosts under group - [coprhd]
+  + Edit `hosts` file to specify your remote hosts; all playbooks in this repo work with hosts under group - [coprhd]
 
-  + Run `./add-note.sh` to allow ansible ssh access
+  + Run `ansible-playbook plays/ssh-addkey.yml -i hosts` to allow ansible ssh access
 
-  + Run `ansible all -m ping -i hosts`
+  + Run `ansible coprhd -m ping -i hosts`
    --> Varify output:
 	coprhd-public | SUCCESS => {
     	"changed": false,
@@ -28,25 +28,22 @@
 	}
 
 ```bash
-./mac-mgmt-node.sh
+.setup/mac-mgmt-node.sh
 vi hosts
-./add-note.sh
-ansible all -m ping -i hosts
+ansible-playbook plays/ssh-addkey.yml -i hosts
+ansible coprhd -m ping -i hosts
 ```
 
 ### CoprHD Deployment
 
-+ Modify user name in `add-user.yml`
-+ Modify network setting in `ovfenv.properties`
-+ Run playbooks: `ansible-playbook playbook/[playbook] -i hosts`
++ Modify user name in `plays/add-user.yml` (password for the user: p@ssw0rd)
++ Modified host ip/gateway/netmask in `plays/coprhd-env-setup.yml`
++ Run playbooks: `ansible-playbook plays/[playbook] -i hosts`
 
 ```bash
-ansible-playbook playbook/coprhd-env-detail.yml -i hosts
-ansible-playbook playbook/add-user.yml -i hosts
-ssh root@XX.XX.XX.XX
-sudo passwd [newUser]
-exit
-ansible-playbook playbook/coprhd-deploy.yml -i hosts
+ansible-playbook plays/add-user.yml -i hosts #just in case you can ssh into your coprhd host after deployment
+ansible-playbook plays/coprhd-env-setup.yml -i hosts
+ansible-playbook plays/coprhd-deploy.yml -i hosts --tags master-branch
 ```
 
 ### ScaleIO driver deployment
@@ -54,8 +51,9 @@ ansible-playbook playbook/coprhd-deploy.yml -i hosts
 Note: the version of master branch that is  used in this repo doesn't have the fully support of southbound SDK, namely, the scaleIO driver is not fully functioning if deployed to master branch.
 
 ``` bash
-ansible-playbook playbook/retrieve-driver-configuration-files.yml -i hosts
-ansible-playbook playbook/scaleio-driver-deployment.yml -i hosts
+ansible-playbook plays/coprhd-deploy.yml -i hosts --tags ingestion-branch` # pull lastest repo, not guarantee would work
+ansible-playbook plays/fetch-driver.confs.yml -i hosts
+ansible-playbook plays/scaleio-driver-deployment.yml -i hosts
 ```
 
 #### Configurations
@@ -128,11 +126,9 @@ ansible-playbook playbook/scaleio-driver-deployment.yml -i hosts
   * add `:${LIB_DIR}/scaleiodriver.jar"` to the end of classpath
 
 ### Playbooks Quick Look
-  + `coprhd-env.yml`: use the script provided in the coprHD repo to set up environment for coprHD host.
-    * modify `ovfenv.properties` file with your own network setting
-
+  + `coprhd-env-org-script.yml`: use the script provided in the coprHD repo to set up environment for coprHD host.
   + `coprhd-env-local-script.yml`: use modified script provided by CoprHD, removing some packages: docker, virtualBox, etc. (which caused issues in my environment)
-  + `coprhd-env-detail.yml`: use ansible modules to set up coprHD host environment
+  + `coprhd-env-setup.yml`: use ansible modules to set up coprHD host environment
     * need modification on ovfenv.properties beforehand
 
   + `coprhd-deploy.yml`: coprHD deployment
@@ -141,18 +137,16 @@ ansible-playbook playbook/scaleio-driver-deployment.yml -i hosts
     - enable root ssh after deployment
       + Note: login password changed to coprHD password
 
-  + `redeploy-cleanup.yml`: clean up coprhd host before performing re-deployment
+  + `coprhd-uninstall.yml`: clean up coprhd host before performing re-deployment
 
   + `proxy-resolve.yml`: Resolve proxy problem if you deploy coprhd behind a proxy.
 
-  + `add-user.yml`: add an extra user to the system for ssh.
+  + `add-user.yml`: add an extra user to the system for ssh. password: p@ssw0rd
     * Note: after coprHD deployment, system will be set to not allow root ssh.
     * after running this playbook, make sure login into system as root, to update the password for the new user.
+      - `SHA512_password.sh` you can use this script to generate the encrypted password and replace the one in the playbook
 
 ### Issues and Solutions
-
-#### import error: No module named ****
-+ zypper install python-setuptools
 
 #### Fail to ssh
 + solution: Login into your host, restart the ssh service

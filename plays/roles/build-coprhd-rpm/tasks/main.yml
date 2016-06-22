@@ -1,0 +1,6 @@
+---
+  - name: go to coprhd-controller folder and build rpm  - takes within 10 mins
+    command: chdir=/root/coprhd-controller make clobber BUILD_TYPE=oss rpm
+    register: output
+
+  - debug: msg="{{output.stdout}}"

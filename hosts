@@ -1,5 +1,5 @@
 coprhd-public    ansible_ssh_host=128.193.4.109  ansible_user=root
 coprhd-openstack ansible_ssh_host=10.193.17.144  ansible_user=root
+coprhd-vagrant	ansible_ssh_host=localhost ansible_ssh_port=2222 ansible_user=root
 [coprhd]
 coprhd-public
-[coprhd:vars]

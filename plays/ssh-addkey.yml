@@ -1,0 +1,8 @@
+---
+- hosts: coprhd
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - { role: install-ssh-key, user: root }
+    - minimum-python-requirement

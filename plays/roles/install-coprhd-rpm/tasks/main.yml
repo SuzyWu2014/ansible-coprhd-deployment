@@ -1,0 +1,8 @@
+---
+  - name: install coprhd rpm
+    command: rpm -Uvh /root/coprhd-controller/build/RPMS/x86_64/*.rpm
+    tags:
+    - skip_ansible_lint
+    register: output
+
+  - debug: msg="{{output.stdout}}"

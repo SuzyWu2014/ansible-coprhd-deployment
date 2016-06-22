@@ -1,0 +1,4 @@
+# Here are the variables to the CoprHD servers
+
+# http_proxy: http://proxy.oregonstate.edu:3128
+# https_proxy: http://proxy.oregonstate.edu:3128

@@ -1,0 +1,5 @@
+---
+  - name: copy ovfenv.properties
+    template: src=templates/ovfenv.properties dest=/etc/ovfenv.properties
+    with_items:
+    - {ip: "{{host_ip}}", gw: "{{gateway}}", netmask: "{{netmask}}"}

@@ -1,0 +1,5 @@
+---
+  - name: install python setup tool
+    command: zypper --non-interactive --no-gpg-checks install --details --no-recommends --force-resolution python-setuptools
+    tags:
+      - skip_ansible_lint

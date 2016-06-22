@@ -1,0 +1,13 @@
+---
+- hosts: coprhd
+  gather_facts: no
+  remote_user: root
+  vars:
+    sudoers:
+      shujin
+
+  roles:
+    - git-clone-coprhd-repo
+    - {role: build-coprhd-rpm, tags: ["master-branch", "ingestion-branch"]}
+    - {role: install-coprhd-rpm, tags: ["master-branch", "ingestion-branch"]}
+    - {role: enable-ssh, tags: ["master-branch", "ingestion-branch"]}

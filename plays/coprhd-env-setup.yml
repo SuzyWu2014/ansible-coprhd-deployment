@@ -1,0 +1,14 @@
+---
+# This file configures OpenSuse environment for CoprHD using the provided scripts in CoprHD repo
+
+- hosts: coprhd
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - install-repos
+    - install-pkgs
+    - install-java-8
+    - install-patched-nginx-server
+    - create-storageos-user
+    - {role: create-network-conf, host_ip: "128.193.4.109", gateway: "128.193.4.1", netmask: "255.255.254.0"}

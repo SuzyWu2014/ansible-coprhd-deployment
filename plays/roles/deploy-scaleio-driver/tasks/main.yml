@@ -1,0 +1,12 @@
+---
+  - name: apply conf files
+    copy: dest={{item.dst}} src=/Users/shujinwu/tmp/{{item.src}} force=yes backup=yes
+    with_items:
+      - {dst: "/opt/storageos/conf/controller-conf.xml", src: "controller-conf.xml"}
+      - {dst: "/opt/storageos/conf/discovery-externaldevice-context.xml", src: "discovery-externaldevice-context.xml"}
+      - {dst: "/opt/storageos/cli/bin/storagesystem.py", src: "storagesystem.py"}
+      - {dst: "/opt/storageos/bin/controllersvc", src: "controllersvc"}
+
+  - name: get driver jar
+    get_url: url=https://coprhd.atlassian.net/wiki/download/attachments/13205537/scaleiodriver.jar?api=v2 dest=/opt/storageos/lib/scaleiodriver.jar
+    notify: restart coprhd service

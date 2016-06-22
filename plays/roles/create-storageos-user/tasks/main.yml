@@ -1,0 +1,15 @@
+---
+  ############################################################################
+  #
+  #  Create the storageOS user and group
+  #
+  ############################################################################
+
+  - name: create the storageOS user and group
+    group: name=storageos state=present gid=444
+
+  - user: name=storageos system=yes home=/opt/storageos comment="StorageOS" uid=444 group=storageos shell=/bin/bash state=present
+
+  - file: group=storageos owner=storageos recurse=yes state=directory path=/opt/storageos
+
+  - file: group=storageos owner=storageos recurse=yes state=directory path=/data

@@ -1,0 +1,3 @@
+---
+  - name: restart coprhd service
+    command: /etc/storageos/storageos restart

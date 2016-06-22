@@ -1,0 +1,20 @@
+---
+  - name: intall repositories
+    zypper_repository: name={{ item.name }} repo={{ item.url }} state=present disable_gpg_check=yes refresh=yes overwrite_multiple=yes
+    with_items:
+      - { name: "suse-13.2-oss", url: "http://download.opensuse.org/distribution/13.2/repo/oss/suse" }  #priority=3
+      - { name: "suse-13.2-oss-update", url: "http://download.opensuse.org/distribution/13.2/repo/non-oss/suse" }  #priority=99
+      - { name: "suse-13.2-monitoring", url: "http://download.opensuse.org/repositories/server:/monitoring/openSUSE_13.2" }  #priority=1
+      - { name: "suse-13.2-seife", url: "http://download.opensuse.org/repositories/home:/seife:/testing/openSUSE_13.2" }  #priority=1
+      - { name: "suse-13.2-python", url: "http://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_13.2" }  #priority=4
+      - { name: "suse-13.2-network", url: "http://download.opensuse.org/repositories/network:/utilities/openSUSE_13.2" }  #priority=4
+      - { name: "suse-13.2-building", url: "http://download.opensuse.org/repositories/devel:/tools:/building/openSUSE_13.2" }  #priority=5
+      - { name: "suse-13.2-appliances", url: "http://download.opensuse.org/repositories/Virtualization:/Appliances/openSUSE_13.2" }  #priority=1
+      - { name: "suse-13.2-containers", url: "http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2" }  #priority=1
+      - { name: "suse-13.2-scalpel4k", url: "http://download.opensuse.org/repositories/home:/scalpel4k/openSUSE_Factory/" }
+
+  - name: zypper update - It might take very long time in the first run...
+    command: zypper update -y
+
+  - name: refresh repositories
+    command: zypper refresh

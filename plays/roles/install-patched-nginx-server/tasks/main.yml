@@ -1,0 +1,31 @@
+---
+  ############################################################################
+  #
+  #  Install Patched Nginx Server
+  #
+  ############################################################################
+  - name: install Patched Nginx server
+    file: path=/tmp/nginx state=directory recurse=yes
+
+  - unarchive: src=http://nginx.org/download/nginx-1.6.2.tar.gz dest=/tmp/nginx copy=no
+
+  - unarchive: src=https://github.com/yaoweibin/nginx_upstream_check_module/archive/v0.3.0.tar.gz dest=/tmp/nginx copy=no
+
+  - unarchive: src=https://github.com/openresty/headers-more-nginx-module/archive/v0.25.tar.gz dest=/tmp/nginx copy=no
+
+  - patch: >
+      src=/tmp/nginx/nginx_upstream_check_module-0.3.0/check_1.5.12+.patch
+      basedir=/tmp/nginx/nginx-1.6.2
+      strip=1
+      remote_src=yes
+
+  - shell: ./configure --add-module=/tmp/nginx/nginx_upstream_check_module-0.3.0 --add-module=/tmp/nginx/headers-more-nginx-module-0.25 --with-http_ssl_module --prefix=/usr --conf-path=/etc/nginx/nginx.conf
+    args:
+      chdir: /tmp/nginx/nginx-1.6.2/
+      executable: /bin/bash
+
+  - command: chdir=/tmp/nginx/nginx-1.6.2 make
+
+  - command: chdir=/tmp/nginx/nginx-1.6.2 make install
+
+  - file: path=/tmp/nginx state=absent

@@ -1,0 +1,7 @@
+---
+- hosts: coprhd
+  gather_facts: no
+  remote_user: root
+
+  roles:
+    - coprhd-clean-up

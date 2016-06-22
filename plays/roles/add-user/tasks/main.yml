@@ -1,0 +1,3 @@
+---
+  - name: Add user
+    user: name="{{ sudoers }}" state=present createhome=yes password={{pwd}}

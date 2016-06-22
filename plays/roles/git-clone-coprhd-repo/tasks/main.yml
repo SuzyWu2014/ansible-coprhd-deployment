@@ -1,0 +1,9 @@
+---
+  - name: git clone coprhd repo - master
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes version=de6886429da0d9c523fbd551952a4bf933ee5eed
+    tags: master-branch
+
+  - name: git clone coprhd repo - ingestion
+    git: repo=https://review.coprhd.org/scm/ch/coprhd-controller.git dest=/root/coprhd-controller update=yes clone=yes
+    tags: ingestion-branch
+    #version=0962701acb0b8f72e47e1f109f59b451c431ca55

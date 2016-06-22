@@ -1,0 +1,9 @@
+---
+  - name: remove storageos
+    zypper: name=storageos state=absent
+
+  - name: clean up /data
+    file: path=/data state=absent
+
+  - name: remove repo
+    file: path=/root/coprhd-controller state=absent

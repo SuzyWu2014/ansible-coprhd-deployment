@@ -1,0 +1,10 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "flavio/opensuse13-2"
+    config.vm.define "coprhd"
+    config.vm.host_name = "coprhd-vagrant"
+    config.vm.network "forwarded_port", guest: 8080, host: 8082
+
+    config.vm.provision "ansible" do |ansible|
+    	ansible.playbook = "../plays/ssh-addkey.yml"
+    end
+end
