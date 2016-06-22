@@ -1,5 +1,5 @@
 playbook/*.retry
 setup/.vagrant
-play/*.retry
+plays/*.retry
 
 .DS_Store
