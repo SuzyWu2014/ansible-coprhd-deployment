@@ -9,7 +9,7 @@
 
 ## Prerequisites:
  - Remote CorpHD Host: OpenSuse 13.2
- - Make sure you are able to ssh into your coprHD host using root as username
+ - Make sure you are able to ssh into your coprHD host using username(root) and password
 
 ## Usage:
 
@@ -18,7 +18,7 @@
 
   + Edit `hosts` file to specify your remote hosts; all playbooks in this repo work with hosts under group - [coprhd]
 
-  + Run `ansible-playbook plays/ssh-addkey.yml -i hosts` to allow ansible ssh access
+  + Run 'ssh-addkey.yml` to upload ssh key to remote host
 
   + Run `ansible coprhd -m ping -i hosts`
    --> Varify output:
@@ -30,18 +30,18 @@
 ```bash
 .setup/mac-mgmt-node.sh
 vi hosts
-ansible-playbook plays/ssh-addkey.yml -i hosts
+ansible-playbook plays/ssh-addkey.yml -i hosts --ask-pass # your root password
 ansible coprhd -m ping -i hosts
 ```
 
 ### CoprHD Deployment
 
-+ Modify user name in `plays/add-user.yml` (password for the user: p@ssw0rd)
++ Modify user name in `plays/add-user.yml` ( default password for the user: p@ssw0rd)
 + Modified host ip/gateway/netmask in `plays/coprhd-env-setup.yml`
 + Run playbooks: `ansible-playbook plays/[playbook] -i hosts`
 
 ```bash
-ansible-playbook plays/add-user.yml -i hosts #just in case you can ssh into your coprhd host after deployment
+ansible-playbook plays/add-user.yml -i hosts  #just in case you can't ssh into your coprhd host after deployment
 ansible-playbook plays/coprhd-env-setup.yml -i hosts
 ansible-playbook plays/coprhd-deploy.yml -i hosts --tags master-branch
 ```
@@ -51,8 +51,9 @@ ansible-playbook plays/coprhd-deploy.yml -i hosts --tags master-branch
 Note: the version of master branch that is  used in this repo doesn't have the fully support of southbound SDK, namely, the scaleIO driver is not fully functioning if deployed to master branch.
 
 ``` bash
-ansible-playbook plays/coprhd-deploy.yml -i hosts --tags ingestion-branch` # pull lastest repo, not guarantee would work
+ansible-playbook plays/coprhd-deploy.yml -i hosts --tags ingestion-branch` # the current lastest branch doesn't work
 ansible-playbook plays/fetch-driver.confs.yml -i hosts
+vi [conf-file]
 ansible-playbook plays/scaleio-driver-deployment.yml -i hosts
 ```
 
@@ -124,6 +125,17 @@ ansible-playbook plays/scaleio-driver-deployment.yml -i hosts
 
 + controllersvc-debug
   * add `:${LIB_DIR}/scaleiodriver.jar"` to the end of classpath
+
+#### discover ScaleIO system: (temporary approach)
+
+Please refer to [coprhd_aio](https://github.com/curtbruns/coprhd_aio) if you need a ScaleIO system for demo.
+
+```bash
+ssh root@ip_address
+cd /opt/storageos/cli/bin/
+./viprcli authenticate -hn coprhd-host-ip -u root -d /tmp
+./viprcli storagesystem create -hostname coprhd-host-ip -n pdomain -t scaleiosystem -dip scaleio-cluster-mdm-ip -dp 443 -u admin
+```
 
 ### Playbooks Quick Look
   + `coprhd-env-org-script.yml`: use the script provided in the coprHD repo to set up environment for coprHD host.
